@@ -114,10 +114,10 @@ def add_user():
     _city = request.args.get('city')
 
     if _name and _email and _city:
-  	  user = User.query.filter_by(email=_email).first()
-  	  if user:
-  		  return "email id already exist, please use something else"
-
+      user = User.query.filter_by(email=_email).first()
+      if user:
+        return "email id already exist, please use something else"
+        
       _user = User(_name, _email, _city)
       db.session.add(_user)
       db.session.commit()

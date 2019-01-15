@@ -1,4 +1,5 @@
 import hashlib
+import os
 
 from flask_httpauth import HTTPBasicAuth
 

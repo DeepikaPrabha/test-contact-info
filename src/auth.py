@@ -2,6 +2,9 @@ import hashlib
 
 from flask_httpauth import HTTPBasicAuth
 
+PASSWORD = os.environ['password']
+USERNAME = os.environ['username']
+
 auth = HTTPBasicAuth()
 
 @auth.get_password

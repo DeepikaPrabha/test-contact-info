@@ -29,16 +29,12 @@ dictConfig({
 RESULT_COUNT = 10
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///flask_app.db')
-PASSWORD = os.environ['password']
-USERNAME = os.environ['username']
-
-LOGGER = logging.getLogger()
-LOGGER.addHandler(default_handler)
 
 app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
-
+LOGGER = logging.getLogger()
+LOGGER.addHandler(default_handler)
 
 class User(db.Model):
     email = db.Column(db.String(60), primary_key=True)
@@ -63,23 +59,25 @@ def index():
 @auth.login_required
 def delete_user():
     email = request.args.get('email')
-    print(request.args)
     if email:
         _user = User.query.filter_by(email=email).first()
         if _user:
             db.session.delete(_user)
             db.session.commit()
-            return "Deleted user sucessfully"
+            return "Deleted user successfully"
         else:
-            return "No such user"
+            return "No such user exist"
 
-    return "Missing email"
+    return "Missing email in request, discarding"
 
 
 @app.route('/update_user', methods=['PUT'])
 @auth.login_required
 def update_user():
-    _email = request.args['email']
+    _email = request.args.get('email')
+    if not _email:
+      return "email is missing in request body"
+
     _name = request.args.get('name')
     _city = request.args.get('city')
     _user = User.query.filter_by(email=_email).first()
@@ -90,11 +88,11 @@ def update_user():
         if _city:
             _user.city = _city
         db.session.commit()
-        msg = "Updated User {} sucessfully".format(_name)
+        msg = "Updated User {} successfully".format(_name)
         LOGGER.info(msg)
         return msg
     else:
-        return "Email doesn't exist"
+        return "Email doesn't exist in db"
 
 
 @app.route('/add_user', methods=['POST'])
@@ -116,7 +114,7 @@ def add_user():
         LOGGER.info(msg)
         return msg
     else:
-        return "Missing one of argument, name = [{}], email = [{}], city = [{}]".format(_name, _email, _city)
+        return "Missing one of these arguments, name = [{}], email = [{}], city = [{}]".format(_name, _email, _city)
 
 
 @app.route('/search_by_name', methods=['GET'])

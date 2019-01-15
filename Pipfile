@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+flask =  "==1.0.2"
+flask_sqlalchemy =  "==2.3.2"
+flask_httpauth = "==3.2.4"
+
+
+[dev-packages]
+pytest = "*"

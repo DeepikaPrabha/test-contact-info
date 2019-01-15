@@ -29,7 +29,7 @@ RESULT_COUNT = 10
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///flask_app.db')
 
-PASSWORD =  os.environ.['password']
+PASSWORD =  os.environ['password']
 USERNAME = os.environ['username']
 
 LOGGER = logging.getLogger()

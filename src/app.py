@@ -78,9 +78,9 @@ def delete_user():
     email = request.args.get('email')
     print(request.args)
     if email:
-      d = User.query.filter_by(email=email).first()
-      if d:
-        db.session.delete(d)
+      _user = User.query.filter_by(email=email).first()
+      if _user:
+        db.session.delete(_user)
         db.session.commit()
         return "Deleted user"
       else:
@@ -94,13 +94,13 @@ def update_user():
     _email = request.args['email']
     _name =  request.args.get('name')
     _city = request.args.get('city')
-    u = User.query.filter_by(email=_email).first()
-    print(u)
-    if u : 
+    _user = User.query.filter_by(email=_email).first()
+    
+    if _user : 
       if _name:
-        u.name = _name
+        _user.name = _name
       if _city:
-        u.city = _city
+        _user.city = _city
       db.session.commit()
       return "Updated User {}".format(_name)
     else:
@@ -114,11 +114,12 @@ def add_user():
     _city = request.args.get('city')
 
     if _name and _email and _city:
-	  user = User.query.filter_by(email=_email).first()
-	  if user:
-		return "email id already exist, please use something else"
-      u = User(_name, _email, _city)
-      db.session.add(u)
+  	  user = User.query.filter_by(email=_email).first()
+  	  if user:
+  		  return "email id already exist, please use something else"
+
+      _user = User(_name, _email, _city)
+      db.session.add(_user)
       db.session.commit()
       return "Added user : {}".format(_name)
     else:

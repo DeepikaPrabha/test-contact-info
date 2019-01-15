@@ -38,7 +38,6 @@ LOGGER.addHandler(default_handler)
 app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
-# password = 123
 
 class User(db.Model):
   email = db.Column(db.String(60), primary_key=True)
@@ -71,7 +70,7 @@ def verify_password(username, password):
 @auth.login_required
 def index():
   username = auth.username()
-  return "Please use endpoint {}".format(username)
+  return "{}, Welcome to contact page.\nPlease use 'add_user/update_user/delete_user/search_by_email/search_by_name' endpoints ".format(username.lower())
 
 @app.route('/delete_user', methods=['DELETE'])
 @auth.login_required
@@ -110,12 +109,14 @@ def update_user():
 @app.route('/add_user', methods=['POST'])
 @auth.login_required
 def add_user():
-    print(request.args)  
     _email = request.args.get('email')
     _name =  request.args.get('name')
     _city = request.args.get('city')
 
     if _name and _email and _city:
+	  user = User.query.filter_by(email=_email).first()
+	  if user:
+		return "email id already exist, please use something else"
       u = User(_name, _email, _city)
       db.session.add(u)
       db.session.commit()
@@ -148,6 +149,7 @@ def search_by_email():
       return "Need a value for _email"
 
 if __name__ == '__main__':
+  LOGGER.info("Starting app")
   db.create_all()
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port, debug=True)

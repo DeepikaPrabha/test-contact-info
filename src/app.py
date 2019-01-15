@@ -116,8 +116,7 @@ def add_user():
         LOGGER.info(msg)
         return msg
     else:
-        return "Missing one of argument, name = [{}], "
-                "email = [{}], city = [{}]".format(_name, _email, _city)
+        return "Missing one of argument, name = [{}], email = [{}], city = [{}]".format(_name, _email, _city)
 
 
 @app.route('/search_by_name', methods=['GET'])

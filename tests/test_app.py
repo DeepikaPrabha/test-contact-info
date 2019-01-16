@@ -1,16 +1,15 @@
-
-import unittest
+import json
 import mock
 import os
-import app
 import requests
+import unittest
+
+import app
+import auth
 from app import db as test_db
 from app import app as test_app
 from base64 import b64encode
 from mock import patch
-import auth
-import json
-
 
 TEST_DB = 'sqlite:///' + 'test.db'
 env = {}

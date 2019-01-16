@@ -6,10 +6,47 @@
       <center>
 	  <h1> 
 	  Welcome to contact page.
-	  <br>
-	  Please use 'add_user/update_user/delete_user/
-		search_by_email/search_by_name' endpoints 
+	  
 	  </h1>
+	  <br>
+	  Please use 'add_user/update_user/delete_user/search_by_email/search_by_name' endpoints 
+	  <p>
+	<br> App for saving contacts
+	<br> It uses python flask to build up api and postgresql to save contact
+	<br> It is deployed in heroku web app.
+	<br> https://test-contact-info.herokuapp.com
+
+	<h2> Endpoints </h2>
+
+	<h3> Add user </h3>
+	<br> url = https://test-contact-info.herokuapp.com/add_user
+	<br> HTTP Request type = POST
+	<br> Request param : [name, email, city] (All required)
+
+	<h3> Update user </h3>
+	<br> https://test-contact-info.herokuapp.com/update_user
+	<br> HTTP Request type = PUT
+	<br> Request param : email - (required) , [name, city] - optional
+
+	<h3> Delete User </h3>
+	<br> https://test-contact-info.herokuapp.com/delete_user
+	<br> HTTP Request type = Delete
+	<br> Request param : email - (required)
+
+	<h3> Serach by name </h3>
+	<br> https://test-contact-info.herokuapp.com/search_by_name
+	<br> HTTP Request type = GET
+	<br> Request param : name - (required)
+
+	<h3> Serach by email </h3>
+	<br> https://test-contact-info.herokuapp.com/search_by_email
+	<br> HTTP Request type = GET
+	<br> Request param : email - (required)
+
+	<h2> Notes </h2>
+	<br> It needs basic authentication to use ADD/UPDATE/DElETE endpoint
+	<br> For searching, it doesn't require any login credentials
+	  </p>
 	  </center>
    </body>
 </html>

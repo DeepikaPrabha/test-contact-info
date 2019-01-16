@@ -51,9 +51,7 @@ class User(db.Model):
 @auth.login_required
 def index():
     username = auth.username()
-    return "Welcome to contact page.\nPlease use 'add_user/update_user/delete_user/"
-    "search_by_email/search_by_name' endpoints "
-
+    return render_template('home.html')
 
 @app.route('/delete_user', methods=['DELETE'])
 @auth.login_required
@@ -122,8 +120,8 @@ def search_by_name():
     _name = request.args.get('name')
     if _name:
         LOGGER.info("Searcing by name : %s", _name)
-        u = User.query.filter(User.name == _name).limit(RESULT_COUNT).all()
-        return render_template('users.html', users=u)
+        user = User.query.filter(User.name == _name).limit(RESULT_COUNT).all()
+        return render_template('users.html', users=user)
     elif _name is None:
         return "Missing argument _name"
     else:

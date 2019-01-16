@@ -51,8 +51,8 @@ class User(db.Model):
 @auth.login_required
 def index():
     username = auth.username()
-    return "{}, Welcome to contact page.\nPlease use 'add_user/update_user/delete_user/"
-    "search_by_email/search_by_name' endpoints ".format(username.upper())
+    return "Welcome to contact page.\nPlease use 'add_user/update_user/delete_user/"
+    "search_by_email/search_by_name' endpoints "
 
 
 @app.route('/delete_user', methods=['DELETE'])

@@ -21,12 +21,12 @@
 * HTTP Request type = Delete
 * Request param : email - (required)
 
-### Serach by name
+### Search by name
 * https://test-contact-info.herokuapp.com/search_by_name
 * HTTP Request type = GET
 * Request param : name - (required)
 
-### Serach by email
+### Search by email
 * https://test-contact-info.herokuapp.com/search_by_email
 * HTTP Request type = GET
 * Request param : email - (required)
